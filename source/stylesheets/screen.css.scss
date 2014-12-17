@@ -76,9 +76,14 @@ html, body {
   left: 0;
   bottom: 0;
   width: $nav-width;
-  background-color: $nav-bg;
+  background-color: #fff;
   font-size: 13px;
   font-weight: bold;
+  border-right: 1px solid #ddd;
+
+  #toc {
+    padding-top: 20px;
+  }
 
   // language selector for mobile devices
   .lang-selector {
@@ -182,9 +187,11 @@ html, body {
 
   // This is the currently selected ToC entry
   .tocify-focus {
-    @include box-shadow(0px 1px 0px $nav-active-shadow);
     background-color: $nav-active-bg;
-    color: $nav-active-text;
+
+    a {
+      color: #fff;
+    }
   }
 
   // Subheaders are the submenus that slide open
@@ -198,8 +205,7 @@ html, body {
       font-size: 12px;
     }
 
-    // for embossed look:
-    @include embossed-bg;
+
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
@@ -211,7 +217,7 @@ html, body {
     border-top: 1px dashed $nav-footer-border-color;
 
     li,a {
-      color: $nav-text;
+      color: #333;
       text-decoration: none;
     }
 
@@ -564,6 +570,8 @@ html, body {
   }
 
   blockquote {
+    padding: 24px 28px 10px 28px;
+
     &>p {
       background-color: $code-annotation-bg;
       border-radius: 5px;
