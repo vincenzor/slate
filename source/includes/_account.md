@@ -44,7 +44,7 @@ GET https://api.postponeapp.com/v1/account
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/account \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:

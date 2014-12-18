@@ -49,7 +49,7 @@ POST https://api.postponeapp.com/v1/workspaces
 
 # EXAMPLE
 curl -X POST https://api.postponeapp.com/v1/workspaces \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "name=My wedding party"
 ```
 
@@ -98,7 +98,7 @@ GET https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -150,7 +150,7 @@ PUT https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
 
 # EXAMPLE
 curl -X PUT https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "name=New workspace name"
 ```
 
@@ -200,7 +200,7 @@ DELETE https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
 
 # EXAMPLE
 curl -X DELETE https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -244,7 +244,7 @@ GET https://api.postponeapp.com/v1/workspaces
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/workspaces \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:

@@ -59,7 +59,7 @@ POST https://api.postponeapp.com/v1/invitations
 
 # EXAMPLE
 curl -X POST https://api.postponeapp.com/v1/invitations \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "workspace_uuid=f90650f8-81e5-11e4-b116-123b93f75cba"
   -d "email=contact@postponeapp.com"
 ```
@@ -114,7 +114,7 @@ GET https://api.postponeapp.com/v1/invitations/{INVITATION_UUID}
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/invitations/78c1d7d4-8206-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -169,7 +169,7 @@ PUT https://api.postponeapp.com/v1/invitations/{INVITATION_UUID}
 
 # EXAMPLE
 curl -X PUT https://api.postponeapp.com/v1/invitations/78c1d7d4-8206-11e4-b116-123b93f75cba \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "status=accepted"
   -d "responded_by_user_uuid=0b4e001c-81e6-11e4-b116-123b93f75cba"
 ```
@@ -223,7 +223,7 @@ DELETE https://api.postponeapp.com/v1/invitations/{INVITATION_UUID}
 
 # EXAMPLE
 curl -X DELETE https://api.postponeapp.com/v1/invitations/78c1d7d4-8206-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -263,7 +263,7 @@ GET https://api.postponeapp.com/v1/invitations
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/invitations \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:

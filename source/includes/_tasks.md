@@ -61,7 +61,7 @@ POST https://api.postponeapp.com/v1/tasks
 
 # EXAMPLE
 curl -X POST https://api.postponeapp.com/v1/tasks \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "workspace_uuid=f90650f8-81e5-11e4-b116-123b93f75cba \
   -d "title=Do not create another to-do app like the existing 1.000" \
   -d flagged=true
@@ -123,7 +123,7 @@ GET https://api.postponeapp.com/v1/tasks/{TASK_UUID}
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/workspaces/3bd5f844-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -181,7 +181,7 @@ PUT https://api.postponeapp.com/v1/tasks/{TASK_UUID}
 
 # EXAMPLE
 curl -X PUT https://api.postponeapp.com/v1/tasks/3bd5f844-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "title=New task content" \
   -d description=null
 ```
@@ -243,7 +243,7 @@ DELETE https://api.postponeapp.com/v1/tasks/{TASK_UUID}
 
 # EXAMPLE
 curl -X DELETE https://api.postponeapp.com/v1/tasks/3bd5f844-81e5-11e4-b116-123b93f75cba \
-  -u pp_api_key_here:
+  -H "Authorization: Bearer pp_api_key_here"
 ```
 
 > The above command returns JSON structured like this:
@@ -286,7 +286,7 @@ GET https://api.postponeapp.com/v1/tasks
 
 # EXAMPLE
 curl https://api.postponeapp.com/v1/tasks \
-  -u pp_api_key_here: \
+  -H "Authorization: Bearer pp_api_key_here" \
   -d "workspace_uuid=f90650f8-81e5-11e4-b116-123b93f75cba"
 ```
 
