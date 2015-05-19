@@ -1,17 +1,20 @@
-# Workspaces
-## The workspace object
+# Projects
+## The project object
 ```
 # EXAMPLE OBJECT
 ```
 ```json
 {
   "uuid": "f90650f8-81e5-11e4-b116-123b93f75cba",
-  "object": "workspace",
+  "object": "project",
   "name": "Personnal",
   "tasks_count": 32,
   "total_planned_tasks": 15,
   "total_open_tasks": 6,
   "total_done_tasks": 11,
+  "archived_at": null,
+  "archived_by_uuid": null,
+  "inbound_email": "123456abcdef98765@taskbox.io",
   "created_at": 1417978768,
   "updated_at" : 1417978768
 }
@@ -19,36 +22,39 @@
 
 Attribute | Description
 --------- | -----------
-uuid | **string** <br />A universally unique identifier for the workspace
-object | **string** *value is "workspace"*
-name | **string** <br />The workspace’s name
-tasks_count | **integer** <br />The number of tasks linked to this workspace
+uuid | **string** <br />A universally unique identifier for the project
+object | **string** *value is "project"*
+name | **string** <br />The project’s name
+tasks_count | **integer** <br />The number of tasks linked to this project
 total_planned_tasks | **integer** <br />The number of tasks in the Snooze Box
 total_open_tasks | **integer** <br />The number of tasks in the Task Box
 total_done_tasks | **integer** <br />The number of tasks in the Done Box
+archived_at | **timestamp** — *can be null* <br />When the project has been archived
+archived_by_uuid  | **string** — *can be null* <br />The user universally unique identifier who archived the project
+inbound_email | **string** <br />An inbound email used to create a task from email. The subject will be used as the task and the body as the description of the task.
 created_at | **timestamp**
 updated_at | **timestamp**
 
-## Create a workspace
+## Create a project
 ```ruby
 # DEFINITION
-Postpone::Workspace.create()
+Postpone::Project.create()
 
 # EXAMPLE
 >> require 'postpone'
 Postpone.api_key = "pp_api_key_here"
 
-Postpone::Workspace.create(
+Postpone::Project.create(
   :name => "My wedding party"
 )
 ```
 
 ```shell
 # DEFINITION
-POST https://api.postponeapp.com/v1/workspaces
+POST https://postponeapp.com/api/v1/projects
 
 # EXAMPLE
-curl -X POST https://api.postponeapp.com/v1/workspaces \
+curl -X POST https://postponeapp.com/api/v1/projects \
   -H "Authorization: Bearer pp_api_key_here" \
   -d "name=My wedding party"
 ```
@@ -58,46 +64,49 @@ curl -X POST https://api.postponeapp.com/v1/workspaces \
 ```json
 {
   "uuid": "f90650f8-81e5-11e4-b116-123b93f75cba",
-  "object": "workspace",
+  "object": "project",
   "name": "My wedding party",
   "tasks_count": 0,
   "total_planned_tasks": 0,
   "total_open_tasks": 0,
   "total_done_tasks": 0,
+  "archived_at": null,
+  "archived_by_uuid": null,
+  "inbound_email": "123456abcdef98765@taskbox.io",
   "created_at": 1417978768,
   "updated_at" : 1417978768
 }
 ```
 
-Creates a new workspace.
+Creates a new project.
 
 ### Arguments
 Argument | Description
 --------- | -----------
-name | **string** — **required**<br />The workspace's name
+name | **string** — **required**<br />The project's name
 
 ### Returns
-Returns the workspace object.
+Returns the project object.
 
 
-## Retrieving a workspace
+## Retrieving a project
 ```ruby
 # DEFINITION
-Postpone::Workspace.retrieve({WORKSPACE_UUID})
+Postpone::Project.retrieve({PROJECT_UUID})
 
 # EXAMPLE
 >> require 'postpone'
 Postpone.api_key = "pp_api_key_here"
 
-Postpone::Workspace.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
+Postpone::Project.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
 ```
 
 ```shell
 # DEFINITION
-GET https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
+GET https://postponeapp.com/api/v1/projects/{PROJECT_UUID}
 
 # EXAMPLE
-curl https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
+curl https://postponeapp.com/api/v1/projects/f90650f8-81e5-11e4-b116-123b93f75cba \
   -H "Authorization: Bearer pp_api_key_here"
 ```
 
@@ -106,12 +115,15 @@ curl https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75
 ```json
 {
   "uuid": "f90650f8-81e5-11e4-b116-123b93f75cba",
-  "object": "workspace",
+  "object": "project",
   "name": "Personnal",
   "tasks_count": 32,
   "total_planned_tasks": 15,
   "total_open_tasks": 6,
   "total_done_tasks": 11,
+  "archived_at": null,
+  "archived_by_uuid": null,
+  "inbound_email": "123456abcdef98765@taskbox.io",
   "created_at": 1417978768,
   "updated_at" : 1417978768
 }
@@ -120,17 +132,17 @@ curl https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75
 ### Arguments
 Parameter | Description
 --------- | -----------
-uuid | **string** — **required** <br />The universally unique identifier of the workspace to be retrieved.
+uuid | **string** — **required** <br />The universally unique identifier of the project to be retrieved.
 
 ### Returns
-Returns the workspace object.
+Returns the project object.
 
 
 
-## Update a workspace
+## Update a project
 ```ruby
 # DEFINITION
-w = Postpone::Workspace.retrieve({WORKSPACE_UUID})
+w = Postpone::Project.retrieve({PROJECT_UUID})
 w.name = {NAME}
 ...
 w.save
@@ -139,19 +151,19 @@ w.save
 >> require 'postpone'
 Postpone.api_key = "pp_api_key_here"
 
-w = Postpone::Workspace.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
-w.name = "New workspace name"
+w = Postpone::Project.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
+w.name = "New project name"
 w.save
 ```
 
 ```shell
 # DEFINITION
-PUT https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
+PUT https://postponeapp.com/api/v1/projects/{PROJECT_UUID}
 
 # EXAMPLE
-curl -X PUT https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
+curl -X PUT https://postponeapp.com/api/v1/projects/f90650f8-81e5-11e4-b116-123b93f75cba \
   -H "Authorization: Bearer pp_api_key_here" \
-  -d "name=New workspace name"
+  -d "name=New project name"
 ```
 
 > The above command returns JSON structured like this:
@@ -159,47 +171,51 @@ curl -X PUT https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-12
 ```json
 {
   "uuid": "f90650f8-81e5-11e4-b116-123b93f75cba",
-  "object": "workspace",
-  "name": "New workspace name",
+  "object": "project",
+  "name": "New project name",
   "tasks_count": 0,
   "total_planned_tasks": 0,
   "total_open_tasks": 0,
   "total_done_tasks": 0,
+  "archived_at": null,
+  "archived_by_uuid": null,
+  "inbound_email": "123456abcdef98765@taskbox.io",
   "created_at": 1417978768,
   "updated_at" : 1517954345
 }
 ```
 
-Updates the specified workspace by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+Updates the specified project by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
 
 Argument | Description
 --------- | -----------
-name | **string** — **optional**<br />The workspace's name
+name | **string** — **optional**<br />The project's name
+archived_by_uuid | **string** — **optional**<br />If you set this parameter the project will be archived and the `archived_at` attribute will be set
 
 ### Returns
-Returns the workspace object.
+Returns the project object.
 
 
-## Delete a workspace
+## Delete a project
 ```ruby
 # DEFINITION
-w = Postpone::Workspace.retrieve({WORKSPACE_UUID})
+w = Postpone::Project.retrieve({PROJECT_UUID})
 w.delete
 
 # EXAMPLE
 >> require 'postpone'
 Postpone.api_key = "pp_api_key_here"
 
-w = Postpone::Workspace.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
+w = Postpone::Project.retrieve("f90650f8-81e5-11e4-b116-123b93f75cba")
 w.delete
 ```
 
 ```shell
 # DEFINITION
-DELETE https://api.postponeapp.com/v1/workspaces/{WORKSPACE_UUID}
+DELETE https://postponeapp.com/api/v1/projects/{PROJECT_UUID}
 
 # EXAMPLE
-curl -X DELETE https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116-123b93f75cba \
+curl -X DELETE https://postponeapp.com/api/v1/projects/f90650f8-81e5-11e4-b116-123b93f75cba \
   -H "Authorization: Bearer pp_api_key_here"
 ```
 
@@ -212,38 +228,38 @@ curl -X DELETE https://api.postponeapp.com/v1/workspaces/f90650f8-81e5-11e4-b116
 }
 ```
 
-Permanently deletes a workspace. It cannot be undone.
+Permanently deletes a project. It cannot be undone.
 
 <aside class="warning">
-Warning — Deleting a workspace will also delete all tasks listed under that workspace.
+Warning — Deleting a project will also delete all tasks listed under that project.
 </aside>
 
 ### Arguments
 Parameter | Description
 --------- | -----------
-uuid | **string** — **required** <br />The universally unique identifier of the workspace to be deleted.
+uuid | **string** — **required** <br />The universally unique identifier of the project to be deleted.
 
 ### Returns
-Returns an object with a deleted parameter and the workspace UUID.
+Returns an object with a deleted parameter and the project UUID.
 
-## List workspaces
+## List projects
 ```ruby
 # DEFINITION
-Postpone::Workspace.all
+Postpone::Project.all
 
 # EXAMPLE
 >> require 'postpone'
 Postpone.api_key = "pp_api_key_here"
 
-Postpone::Workspace.all
+Postpone::Project.all
 ```
 
 ```shell
 # DEFINITION
-GET https://api.postponeapp.com/v1/workspaces
+GET https://postponeapp.com/api/v1/projects
 
 # EXAMPLE
-curl https://api.postponeapp.com/v1/workspaces \
+curl https://postponeapp.com/api/v1/projects \
   -H "Authorization: Bearer pp_api_key_here"
 ```
 
@@ -256,23 +272,29 @@ curl https://api.postponeapp.com/v1/workspaces \
   "data": [
     {
       "uuid": "f90650f8-81e5-11e4-b116-123b93f75cba",
-      "object": "workspace",
+      "object": "project",
       "name": "Personnal",
       "tasks_count": 32,
       "total_planned_tasks": 15,
       "total_open_tasks": 6,
       "total_done_tasks": 11,
+      "archived_at": null,
+      "archived_by_uuid": null,
+      "inbound_email": "123456abcdef98765@taskbox.io",
       "created_at": 1417978768,
       "updated_at": 1417978768
     },
     {
       "uuid": "36998eac-81e7-11e4-b116-123b93f75cba",
-      "object": "workspace",
+      "object": "project",
       "name": "Wedding",
       "tasks_count": 5,
       "total_planned_tasks": 15,
       "total_open_tasks": 6,
       "total_done_tasks": 11,
+      "archived_at": null,
+      "archived_by_uuid": null,
+      "inbound_email": "445456abcdef98765@taskbox.io",
       "created_at": 1417979550,
       "updated_at": 1417979550
     },
@@ -281,7 +303,7 @@ curl https://api.postponeapp.com/v1/workspaces \
 }
 ```
 
-Returns a list of workspaces. The workspaces are returned sorted by creation date, with the most recently created workspaces appearing first.
+Returns a list of projects. The projects are returned sorted by creation date, with the most recently created projects appearing first.
 
 This list is [paginate](#pagination) by 100 records. A `has_more` field that indicate if you should check the next page is returned and can be `true` or `false`.
 

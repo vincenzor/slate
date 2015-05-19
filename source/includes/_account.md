@@ -11,8 +11,7 @@
   "email": "contact@postponeapp.com",
   "firstname": "Vincenzo",
   "lastname": "Ruggiero",
-  "time_zone": "Brussels",
-  "inbound_email": "123456abcdef98765@taskbox.io"
+  "time_zone": "Brussels"
 }
 ```
 
@@ -24,7 +23,6 @@ email | **string** <br />The user’s email address
 firstname | **string** <br />**optional** <br />The user’s firstname
 lastname | **string** <br />**optional** <br />The user’s lastname
 time_zone | **string** <br />The user time_zone
-inbound_email | **string** <br />An inbound email used to create a task from email
 
 ## Retrieve account details
 ```ruby
@@ -40,10 +38,10 @@ Postpone::Account.retrieve()
 
 ```shell
 # DEFINITION
-GET https://api.postponeapp.com/v1/account
+GET https://postponeapp.com/api/v1/account
 
 # EXAMPLE
-curl https://api.postponeapp.com/v1/account \
+curl https://postponeapp.com/api/v1/account \
   -H "Authorization: Bearer pp_api_key_here"
 ```
 
@@ -56,8 +54,7 @@ curl https://api.postponeapp.com/v1/account \
   "email": "contact@postponeapp.com",
   "firstname": "Vincenzo",
   "lastname": "Ruggiero",
-  "time_zone": "Brussels",
-  "inbound_email": "123456abcdef98765@taskbox.io"
+  "time_zone": "Brussels"
 }
 ```
 
